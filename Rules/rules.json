@@ -1,0 +1,45 @@
+
+    [{
+        "subject": "user",
+        "action": "click",
+        "object": "box1",
+        "if": {
+            "attribute": "color",
+            "condition": "==",
+            "value": "blue"
+        },
+        "then": {
+            "attribute": "color",
+            "value": "red"
+        }
+    },
+
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "box1",
+        "if": {
+            "attribute": "color",
+            "condition": "==",
+            "value": "red"
+        },
+        "then": {
+            "attribute": "color",
+            "value": "green"
+        }
+    },
+
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "box1",
+        "if": {
+            "attribute": "color",
+            "condition": "==",
+            "value": "green"
+        },
+        "then": {
+            "attribute": "color",
+            "value": "blue"
+        }
+    }]
