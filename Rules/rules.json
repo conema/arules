@@ -82,4 +82,15 @@
             "attribute": "visible",
             "value": true
         }
+    },
+    {
+        "subject": "user",
+        "action": "mouseEnter",
+        "object": "thumb1",
+        "if": {
+        },
+        "then": {
+            "attribute": "visible",
+            "value": true
+        }
     }]
