@@ -42,4 +42,16 @@
             "attribute": "color",
             "value": "blue"
         }
+    },
+
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "dode1",
+        "if": {
+        },
+        "then": {
+            "attribute": "position",
+            "value": "2 1 -5"
+        }
     }]

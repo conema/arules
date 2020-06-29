@@ -12,58 +12,66 @@ function loadJSON(path) {
     });
 }
 
-
 loadJSON('/Rules/rules.json').then(function (response) {
     var rules = JSON.parse(response);
     document.getElementById(rules[0]["object"]).setAttribute("cursor-listener", "");
 
     var operators = {
-        '+': function(a, b){ return a+b},
-        '-': function(a, b){ return a-b},
-        '==': function(a, b){ return a==b}
+        '+': function (a, b) { return a + b },
+        '-': function (a, b) { return a - b },
+        '==': function (a, b) { return a == b },
+        '<=': function (a, b) { return a <= b },
+        '>=': function (a, b) { return a >= b }
     }
 
+    var idMap = new Map();
 
-    for (var r of rules)
-    {
-        // subject action
-        var action = r["action"];
+    // Create the map of the rules
+    for (var r of rules) {
+        var id = r["object"];
 
-        //  condition
-        var object = document.getElementById(r["object"]);
-        var attribute = r["if"]["attribute"];
-        var condition = r["if"]["condition"];
-        var value = r["if"]["value"];
+        if (idMap.get(id) != undefined) {
+            var ruleMap = idMap.get(id);
 
-        // then
-        var attributeThen = r["then"]["attribute"];
-        var valueThen = r["then"]["value"];
+            if (ruleMap.get(r["action"]) != undefined) {
+                // This action is already present in this object
+                ruleMap.get(r["action"]).push(r);
+            } else {
+                // First time for this action with this object
+                idMap.set(id, new Map().set(r["action"], [r]))
+            }
+        } else {
+            // First time for this object id
+            idMap.set(id, new Map().set(r["action"], [r]))
+        }
+    }
 
-        //object.addEventListener('componentchanged', function (evt) {
+    // Add events listeners
+    for (let [id, actions] of idMap) {
+        for (let [action, rules] of actions){
+            document.getElementById(id).addEventListener(action, function (event) {
 
-        (function(r){
-            object.addEventListener(action, function () {
-                // subject action
-                var action = r["action"];
+                // copy the object (so we don't lose the old state)
+                const object = event.target.cloneNode();
+        
+                for (var r of rules) {
+                    var modifiedObject = event.target;
+        
+                    //  condition
+                    var attribute = r["if"]["attribute"];
+                    var condition = r["if"]["condition"];
+                    var value = r["if"]["value"];
+        
+                    // then
+                    var attributeThen = r["then"]["attribute"];
+                    var valueThen = r["then"]["value"];
 
-                //  condition
-                var object = document.getElementById(r["object"]);
-                var attribute = r["if"]["attribute"];
-                var condition = r["if"]["condition"];
-                var value = r["if"]["value"];
-
-                // then
-                var attributeThen = r["then"]["attribute"];
-                var valueThen = r["then"]["value"];
-
-                if (operators[condition](object.getAttribute(attribute), value)) {
-                    object.setAttribute(attributeThen, valueThen)
-                    console.log(valueThen)
+                    // execute "then" if the "condition" is true or if no condition is defined
+                    if (Object.entries(r["if"]).length === 0 || operators[condition](object.getAttribute(attribute), value)) {
+                        modifiedObject.setAttribute(attributeThen, valueThen)
+                    }
                 }
             });
-        })(r);
-
-
-        //});
+        }
     }
 });
