@@ -94,4 +94,16 @@
             "attribute": "visible",
             "value": false
         }
-    }]
+    },
+        {
+            "subject": "user",
+            "action": "click",
+            "object": "sph1",
+            "if": {
+            },
+            "then": {
+                "object": "sph1",
+                "attribute": "position.x",
+                "value": "{position.x + 10 - position.y}"
+            }
+        }]

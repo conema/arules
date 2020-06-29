@@ -22,7 +22,7 @@ loadJSON('/Rules/rules.json').then(function (response) {
         '==': function (a, b) { return a == b },
         '<=': function (a, b) { return a <= b },
         '>=': function (a, b) { return a >= b }
-    }
+    };
 
     var idMap = new Map();
 
@@ -62,13 +62,31 @@ loadJSON('/Rules/rules.json').then(function (response) {
                     var value = r["if"]["value"];
         
                     // then
-                    var objectThen = r["then"]["object"]
+                    var objectThen = r["then"]["object"];
                     var attributeThen = r["then"]["attribute"];
                     var valueThen = r["then"]["value"];
 
+                    // Evaluation value
+                    if(typeof(valueThen) == "string"  && valueThen.charAt(0) == "{"){
+                        valueThen = valueThen.replace(/([A-z]|\.)+/g, "document.getElementById(objectThen).getAttribute(\"$&\")");
+                        valueThen = valueThen.replace(/\(\"(\w+)(\.\w)\"\)/g, "(\"$1\")$2");
+                        valueThen = valueThen.replace("{", "");
+                        valueThen = valueThen.replace("}", "");
+
+                        valueThen = eval(valueThen);
+                    }
+
+                    // Evaluation attribute
+                    if(attributeThen.includes(".")){
+                        var before = attributeThen.match(/(\w+?)\.\w+/)[1];
+                        var after = attributeThen.match(/\w+\.(\w+?)/)[1];
+
+                        var currentValue = document.getElementById(objectThen).getAttribute(before);
+                        currentValue[after] = valueThen;
+                        valueThen = currentValue;
+                    }
 
                     var modifiedObject = document.getElementById(objectThen) || event.target;
-
 
                     // execute "then" if the "condition" is true or if no condition is defined
                     if (Object.entries(r["if"]).length === 0 || operators[condition](object.getAttribute(attribute), value)) {
