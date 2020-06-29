@@ -85,12 +85,13 @@
     },
     {
         "subject": "user",
-        "action": "mouseEnter",
+        "action": "click",
         "object": "thumb1",
         "if": {
         },
         "then": {
+            "object": "dode1",
             "attribute": "visible",
-            "value": true
+            "value": false
         }
     }]
