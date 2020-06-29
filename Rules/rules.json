@@ -54,4 +54,32 @@
             "attribute": "position",
             "value": "2 1 -5"
         }
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "dode1",
+        "if": {
+            "attribute": "visible",
+            "condition": "==",
+            "value": true
+        },
+        "then": {
+            "attribute": "visible",
+            "value": false
+        }
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "dode1",
+        "if": {
+            "attribute": "visible",
+            "condition": "==",
+            "value": false
+        },
+        "then": {
+            "attribute": "visible",
+            "value": true
+        }
     }]

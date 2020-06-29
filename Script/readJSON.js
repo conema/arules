@@ -52,11 +52,12 @@ loadJSON('/Rules/rules.json').then(function (response) {
             document.getElementById(id).addEventListener(action, function (event) {
 
                 // copy the object (so we don't lose the old state)
-                const object = event.target.cloneNode();
-        
+                var object = event.target.cloneNode(true);
+                object.object3D = event.target.object3D.clone();        // deepclone of threejs object
+
                 for (var r of rules) {
                     var modifiedObject = event.target;
-        
+
                     //  condition
                     var attribute = r["if"]["attribute"];
                     var condition = r["if"]["condition"];
@@ -66,9 +67,10 @@ loadJSON('/Rules/rules.json').then(function (response) {
                     var attributeThen = r["then"]["attribute"];
                     var valueThen = r["then"]["value"];
 
+
                     // execute "then" if the "condition" is true or if no condition is defined
                     if (Object.entries(r["if"]).length === 0 || operators[condition](object.getAttribute(attribute), value)) {
-                        modifiedObject.setAttribute(attributeThen, valueThen)
+                        modifiedObject.setAttribute(attributeThen, valueThen);
                     }
                 }
             });
