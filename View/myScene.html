@@ -15,6 +15,17 @@
             <a-cursor></a-cursor>
         </a-camera>
 
+        <a-assets>
+            <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+            <img id="sechelt-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+        </a-assets>
+    
+        <a-entity id="thumb1" class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: #cubes-thumb"
+            position="-1.060 2 -5"></a-entity>
+
+
         <a-box id="box1" position="-1.060 0.5 -5" rotation="0 45 0" color="blue"></a-box>
         <a-dodecahedron id="dode1" position="1.0096 1 -5" color="purple" radius="1"></a-dodecahedron>
 

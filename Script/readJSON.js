@@ -56,16 +56,18 @@ loadJSON('/Rules/rules.json').then(function (response) {
                 object.object3D = event.target.object3D.clone();        // deepclone of threejs object
 
                 for (var r of rules) {
-                    var modifiedObject = event.target;
-
                     //  condition
                     var attribute = r["if"]["attribute"];
                     var condition = r["if"]["condition"];
                     var value = r["if"]["value"];
         
                     // then
+                    var objectThen = r["then"]["object"]
                     var attributeThen = r["then"]["attribute"];
                     var valueThen = r["then"]["value"];
+
+
+                    var modifiedObject = document.getElementById(objectThen) || event.target;
 
 
                     // execute "then" if the "condition" is true or if no condition is defined
