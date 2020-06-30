@@ -17,13 +17,27 @@ loadJSON('/Rules/rules.json').then(function (response) {
     document.getElementById(rules[0]["object"]).setAttribute("cursor-listener", "");
 
     var operators = {
-        '+': function (a, b) { return a + b },
-        '-': function (a, b) { return a - b },
-        '==': function (a, b) { return a == b },
-        '>': function (a, b) { return a > b },
-        '<': function (a, b) { return a < b },
-        '<=': function (a, b) { return a <= b },
-        '>=': function (a, b) { return a >= b }
+        '+': function (a, b) {
+            return a + b
+        },
+        '-': function (a, b) {
+            return a - b
+        },
+        '==': function (a, b) {
+            return a == b
+        },
+        '>': function (a, b) {
+            return a > b
+        },
+        '<': function (a, b) {
+            return a < b
+        },
+        '<=': function (a, b) {
+            return a <= b
+        },
+        '>=': function (a, b) {
+            return a >= b
+        }
     };
 
     var idMap = new Map();
@@ -50,7 +64,7 @@ loadJSON('/Rules/rules.json').then(function (response) {
 
     // Add events listeners
     for (let [id, actions] of idMap) {
-        for (let [action, rules] of actions){
+        for (let [action, rules] of actions) {
             document.getElementById(id).addEventListener(action, function (event) {
 
                 // copy the object (so we don't lose the old state)
@@ -66,71 +80,60 @@ loadJSON('/Rules/rules.json').then(function (response) {
                     var value = r["if"]["value"];
 
                     // Evaluation condition
-                    //if(attribute.charAt(0) == "{"){
-                        if(attribute.includes(".")){
-                            attribute = attribute.replace(/([A-z]|\.)+/g, "document.getElementById(objectCondition).getAttribute(\"$&\")");
-                            attribute = attribute.replace(/\(\"(\w+)(\.\w)\"\)/g, "(\"$1\")$2");
-                            attribute = attribute.replace("{", "");
-                            attribute = attribute.replace("}", "");
+                    if (typeof (value) == "string" && value.includes(".")) {
+                        value = value.replace(/([A-z1-9]+)\.([A-z1-9]+)\.([A-z1-9]+)/g, "document.getElementById(\"$1\").getAttribute(\"$2\").$3");
+                        value = value.replace(/[^\.]\b([A-z]+)\.([A-z]+)[\s\}\+\*\-\\\%\&\|]/g, "document.getElementById(objectCondition).getAttribute(\"$1\").$2");
 
-                            if(value.includes(".")){
-                                if(value.match(/\./g).length > 1){
-                                    var objectValue = value.match(/(\w+?)\.\w+/)[1];
-                                    var attributeValue = value.match(/\w+\.(\w+?)\.\w+/)[1];
-                                    var attributeValue2 = value.match(/\w+\.(\w+?)/)[1];
+                        value = value.replace("{", "");
+                        value = value.replace("}", "");
 
-                                    value = value.replace(/([A-z1-9]+)\.([A-z1-9]+)\.([A-z1-9]+)/, "document.getElementById(objectValue).getAttribute(\"$2\").$3");
+                        value = eval(value);
+                    }
 
-                                } else {
-                                    var objectValue = object.getAttribute("id");
-                                    var attributeValue = value.match(/(\w+?)\.\w+/)[1];
-                                    var attributeValue2 = value.match(/\w+\.(\w+?)/)[1];
+                    if (typeof (attribute) == "string" && attribute.includes(".")) {
+                        attribute = attribute.replace(/([A-z]|\.)+/g, "document.getElementById(objectCondition).getAttribute(\"$&\")");
+                        attribute = attribute.replace(/\(\"(\w+)(\.\w)\"\)/g, "(\"$1\")$2");
+                        attribute = attribute.replace("{", "");
+                        attribute = attribute.replace("}", "");
 
-                                    value = value.replace(/([A-z]|\.)+/g, "document.getElementById(objectValue).getAttribute(\"$&\")");
-                                    value = value.replace(/\(\"(\w+)(\.\w)\"\)/g, "(\"$1\")$2");
-                                }
+                        attribute = eval(attribute);
+                    } else{
+                        attribute = object.getAttribute(attribute);
+                    }
 
-                                value = value.replace("{", "");
-                                value = value.replace("}", "");
-                                value = eval(value);
-                            }
+                    // then
+                    var objectThen = r["then"]["object"];
+                    var attributeThen = r["then"]["attribute"];
+                    var valueThen = r["then"]["value"];
 
-                            resultCondition = operators[condition](eval(attribute), value);
-                        }
-                    //}
-        
-                    if(resultCondition || Object.entries(r["if"]).length === 0){
-                        // then
-                        var objectThen = r["then"]["object"];
-                        var attributeThen = r["then"]["attribute"];
-                        var valueThen = r["then"]["value"];
 
-                        // Evaluation value
-                        if(typeof(valueThen) == "string"  && valueThen.charAt(0) == "{"){
-                            valueThen = valueThen.replace(/([A-z]|\.)+/g, "document.getElementById(objectThen).getAttribute(\"$&\")");
-                            valueThen = valueThen.replace(/\(\"(\w+)(\.\w)\"\)/g, "(\"$1\")$2");
-                            valueThen = valueThen.replace("{", "");
-                            valueThen = valueThen.replace("}", "");
+                    // Evaluation value
+                    if (typeof (valueThen) == "string" && valueThen.charAt(0) == "{") {
+                        valueThen = valueThen.replace(/([A-z1-9]+)\.([A-z1-9]+)\.([A-z1-9]+)/g, "document.getElementById(\"$1\").getAttribute(\"$2\").$3");
+                        valueThen = valueThen.replace(/[^\.]\b([A-z]+)\.([A-z]+)[\s\}\+\*\-\\\%\&\|]/g, "document.getElementById(objectThen).getAttribute(\"$1\").$2");
 
-                            valueThen = eval(valueThen);
-                        }
+                        valueThen = valueThen.replace("{", "");
+                        valueThen = valueThen.replace("}", "");
 
-                        // Evaluation attribute
-                        if(attributeThen.includes(".")){
-                            var before = attributeThen.match(/(\w+?)\.\w+/)[1];
-                            var after = attributeThen.match(/\w+\.(\w+?)/)[1];
+                        valueThen = eval(valueThen);
+                    }
 
-                            var currentValue = document.getElementById(objectThen).getAttribute(before);
-                            currentValue[after] = valueThen;
-                            valueThen = currentValue;
-                        }
+                    // Evaluation attribute
+                    if (attributeThen.includes(".")) {
+                        var before = attributeThen.match(/(\w+?)\.\w+/)[1];
+                        var after = attributeThen.match(/\w+\.(\w+?)/)[1];
 
-                        var modifiedObject = document.getElementById(objectThen) || event.target;
+                        var currentValue = {... document.getElementById(objectThen).getAttribute(before)};
+                        currentValue[after] = valueThen;
+                        valueThen = currentValue;
+                        attributeThen = before;
+                    }
 
-                        // execute "then" if the "condition" is true or if no condition is defined
-                        if (Object.entries(r["if"]).length === 0 || operators[condition](object.getAttribute(attribute), value)) {
-                            modifiedObject.setAttribute(attributeThen, valueThen);
-                        }
+                    var modifiedObject = document.getElementById(objectThen) || event.target;
+
+                    // execute "then" if the "condition" is true or if no condition is defined
+                    if (Object.entries(r["if"]).length === 0 || operators[condition](attribute, value)) {
+                        modifiedObject.setAttribute(attributeThen, valueThen);
                     }
                 }
             });
