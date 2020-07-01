@@ -100,10 +100,14 @@
             "action": "click",
             "object": "sph1",
             "if": {
+                "object": "box1",
+                "attribute": "position.y",
+                "condition": "==",
+                "value": "{dode1.position.y - dode1.position.y + position.y + box1.position.x - box1.position.x + position.x - position.x}"
             },
             "then": {
                 "object": "sph1",
                 "attribute": "position.x",
-                "value": "{position.x + 10 - position.y}"
+                "value": "{position.x + 3 - position.y + dode1.position.y}"
             }
         }]
