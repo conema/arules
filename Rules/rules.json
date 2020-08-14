@@ -1,5 +1,5 @@
-
-    [{
+[
+    {
         "subject": "user",
         "action": "click",
         "object": "box1",
@@ -13,7 +13,6 @@
             "value": "red"
         }
     },
-
     {
         "subject": "user",
         "action": "click",
@@ -28,7 +27,6 @@
             "value": "green"
         }
     },
-
     {
         "subject": "user",
         "action": "click",
@@ -43,13 +41,11 @@
             "value": "blue"
         }
     },
-
     {
         "subject": "user",
         "action": "click",
         "object": "dode1",
-        "if": {
-        },
+        "if": {},
         "then": {
             "attribute": "position",
             "value": "2 1 -5"
@@ -87,27 +83,46 @@
         "subject": "user",
         "action": "click",
         "object": "thumb1",
-        "if": {
-        },
+        "if": {},
         "then": {
             "object": "dode1",
             "attribute": "visible",
             "value": false
         }
     },
-        {
-            "subject": "user",
-            "action": "click",
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "sph1",
+        "if": {
+            "object": "box1",
+            "attribute": "position.y",
+            "condition": "==",
+            "value": "{dode1.position.y - dode1.position.y + position.y + box1.position.x - box1.position.x + position.x - position.x}"
+        },
+        "then": {
             "object": "sph1",
-            "if": {
-                "object": "box1",
-                "attribute": "position.y",
-                "condition": "==",
-                "value": "{dode1.position.y - dode1.position.y + position.y + box1.position.x - box1.position.x + position.x - position.x}"
-            },
-            "then": {
-                "object": "sph1",
-                "attribute": "position.x",
-                "value": "{position.x + 3 - position.y + dode1.position.y}"
-            }
-        }]
+            "attribute": "position.x",
+            "value": "{position.x + 3 - position.y + dode1.position.y}"
+        }
+    },
+    {
+        "default": true,
+        "action": "change color to",
+        "if": {},
+        "then": {
+            "attribute": "color"
+        }
+    },
+    {
+        "subject": "user",
+        "action": "mouseenter",
+        "object": "sph1",
+        "if": {},
+        "then": {
+            "object": "sph1",
+            "action": "change color to",
+            "value": "green"
+        }
+    }
+]
