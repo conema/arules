@@ -46,6 +46,9 @@ loadJSON('/Rules/rules.json').then(function (response) {
     for (var r of rules) {
         var id = r["object"];
 
+        if (document.getElementById(id) === null)
+            id = r["subject"]
+
         if (idMap.get(id) != undefined) {
             var ruleMap = idMap.get(id);
 
@@ -54,7 +57,7 @@ loadJSON('/Rules/rules.json').then(function (response) {
                 ruleMap.get(r["action"]).push(r);
             } else {
                 // First time for this action with this object
-                idMap.set(id, new Map().set(r["action"], [r]))
+                ruleMap.set(r["action"], [r])
             }
         } else {
             // First time for this object id
@@ -66,6 +69,7 @@ loadJSON('/Rules/rules.json').then(function (response) {
     for (let [id, actions] of idMap) {
         for (let [action, rules] of actions) {
             document.getElementById(id).addEventListener(action, function (event) {
+                console.log("asd")
 
                 // copy the object (so we don't lose the old state)
                 var object = event.target.cloneNode(true);
