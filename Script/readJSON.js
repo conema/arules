@@ -30,6 +30,9 @@ loadJSON('/Rules/rules.json').then(function (response) {
         '==': function (a, b) {
             return a == b
         },
+        '!=': function (a, b) {
+            return a != b
+        },
         '>': function (a, b) {
             return a > b
         },
@@ -43,6 +46,12 @@ loadJSON('/Rules/rules.json').then(function (response) {
             return a >= b
         }
     };
+
+    var synonyms = new Map()
+    synonyms.set("off", 0)
+    synonyms.set("on", 1)
+    synonyms.set("is", "==")
+    synonyms.set("is not", "!=")
 
     var idMap = new Map();
     var defaultMap = new Map();
@@ -89,7 +98,7 @@ loadJSON('/Rules/rules.json').then(function (response) {
             // TODO: da sistemare
             if (idMap.get(id) != undefined) {
                 var ruleMap = idMap.get(id);
-    
+
                 if (ruleMap.get(action) === undefined) {
                     // First time for this action with this object
                     ruleMap.set(action, [r2])
@@ -109,6 +118,9 @@ loadJSON('/Rules/rules.json').then(function (response) {
                 var object = event.target.cloneNode(true);
                 object.object3D = event.target.object3D.clone();        // deepclone of threejs object
 
+                // Remember the initial state of the objects (it could change when we apply the rules)
+                var oldStates = new Map();
+
                 for (var r of rules) {
                     //  condition
                     var resultCondition = false;
@@ -116,6 +128,15 @@ loadJSON('/Rules/rules.json').then(function (response) {
                     var attribute = r["if"]["attribute"];
                     var condition = r["if"]["condition"];
                     var value = r["if"]["value"];
+
+                    // Check synonyms
+                    if (synonyms.get(condition) != undefined) {
+                        condition = synonyms.get(condition)
+                    }
+                    
+                    if (synonyms.get(value) != undefined) {
+                        value = synonyms.get(value)
+                    }
 
                     // Evaluation condition
                     if (typeof (value) == "string" && value.includes(".")) {
@@ -136,7 +157,22 @@ loadJSON('/Rules/rules.json').then(function (response) {
 
                         attribute = eval(attribute);
                     } else {
-                        attribute = object.getAttribute(attribute);
+                        if (objectCondition != undefined) {
+                            // if an object is defined in the condition
+
+
+                            if (oldStates.get(objectCondition) === undefined) {
+                                // Register the original state
+                                state = document.getElementById(objectCondition).cloneNode(true);
+                                state.object3D = document.getElementById(objectCondition).object3D.clone();
+                                oldStates.set(objectCondition, state)
+                            }
+
+                            attribute = oldStates.get(objectCondition).getAttribute(attribute)
+                        } else {
+                            // if no object is defined in the condition, take the object of the when
+                            attribute = object.getAttribute(attribute)
+                        }
                     }
 
                     // then
@@ -144,6 +180,10 @@ loadJSON('/Rules/rules.json').then(function (response) {
                     var attributeThen = r["then"]["attribute"] || r["then"]["action"];
                     var valueThen = r["then"]["value"];
 
+                    // Check synonyms
+                    if (synonyms.get(valueThen) != undefined) {
+                        valueThen = synonyms.get(valueThen)
+                    }
 
                     // Evaluation value
                     if (typeof (valueThen) == "string" && valueThen.charAt(0) == "{") {
