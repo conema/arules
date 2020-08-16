@@ -3,208 +3,386 @@
         "subject": "user",
         "action": "click",
         "object": "dode1",
-        "if": {},
-        "then": {
-            "attribute": "position",
-            "value": "2 1 -5"
-        }
+        "then": [
+            {
+                "attribute": "position",
+                "value": "2 1 -5"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "dode1",
-        "if": {
-            "attribute": "visible",
-            "condition": "==",
-            "value": true
-        },
-        "then": {
-            "attribute": "visible",
-            "value": false
-        }
+        "if": [
+            {
+                "attribute": "visible",
+                "condition": "==",
+                "value": true
+            }
+        ],
+        "then": [
+            {
+                "attribute": "visible",
+                "value": false
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "dode1",
-        "if": {
-            "attribute": "visible",
-            "condition": "==",
-            "value": false
-        },
-        "then": {
-            "attribute": "visible",
-            "value": true
-        }
+        "if": [
+            {
+                "attribute": "visible",
+                "condition": "==",
+                "value": false
+            }
+        ],
+        "then": [
+            {
+                "attribute": "visible",
+                "value": true
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "thumb1",
-        "if": {},
-        "then": {
-            "object": "dode1",
-            "attribute": "visible",
-            "value": false
-        }
+        "then": [
+            {
+                "subject": "dode1",
+                "attribute": "visible",
+                "value": false
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "sph1",
-        "if": {
-            "object": "box1",
-            "attribute": "position.y",
-            "condition": "==",
-            "value": "{dode1.position.y - dode1.position.y + position.y + box1.position.x - box1.position.x + position.x - position.x}"
-        },
-        "then": {
-            "object": "sph1",
-            "attribute": "position.x",
-            "value": "{position.x + 3 - position.y + dode1.position.y}"
-        }
+        "if": [
+            {
+                "object": "box1",
+                "attribute": "position.y",
+                "condition": "==",
+                "value": "{dode1.position.y - dode1.position.y + position.y + box1.position.x - box1.position.x + position.x - position.x}"
+            }
+        ],
+        "then": [
+            {
+                "subject": "sph1",
+                "attribute": "position.x",
+                "value": "{position.x + 3 - position.y + dode1.position.y}"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "mouseenter",
         "object": "sph1",
-        "if": {},
-        "then": {
-            "object": "sph1",
-            "action": "change color to",
-            "value": "green"
-        }
+        "then": [
+            {
+                "subject": "sph1",
+                "action": "change color to",
+                "value": "green"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "box1",
-        "if": {
-            "attribute": "color",
-            "condition": "==",
-            "value": "blue"
-        },
-        "then": {
-            "object": "box1",
-            "action": "change color to",
-            "value": "red"
-        }
+        "if": [
+            {
+                "attribute": "color",
+                "condition": "==",
+                "value": "blue"
+            }
+        ],
+        "then": [
+            {
+                "subject": "box1",
+                "action": "change color to",
+                "value": "red"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "box1",
-        "if": {
-            "attribute": "color",
-            "condition": "==",
-            "value": "red"
-        },
-        "then": {
-            "attribute": "color",
-            "value": "green"
-        }
+        "if": [
+            {
+                "attribute": "color",
+                "condition": "==",
+                "value": "red"
+            }
+        ],
+        "then": [
+            {
+                "attribute": "color",
+                "value": "green"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "box1",
-        "if": {
-            "attribute": "color",
-            "condition": "is",
-            "value": "green"
-        },
-        "then": {
-            "object": "box1",
-            "action": "change color to",
-            "value": "blue"
-        }
+        "if": [
+            {
+                "attribute": "color",
+                "condition": "is",
+                "value": "green"
+            }
+        ],
+        "then": [
+            {
+                "subject": "box1",
+                "action": "change color to",
+                "value": "blue"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "btn1",
-        "if": {
-            "object": "lgt1",
-            "attribute": "intensity",
-            "condition": "is not",
-            "value": "on"
-        },
-        "then": {
-            "object": "lgt1",
-            "action": "turn",
-            "value": "on"
-        }
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is not",
+                "value": "on"
+            }
+        ],
+        "then": [
+            {
+                "subject": "lgt1",
+                "action": "turn",
+                "value": "on"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "btn1",
-        "if": {
-            "object": "lgt1",
-            "attribute": "intensity",
-            "condition": "is",
-            "value": "on"
-        },
-        "then": {
-            "object": "lgt1",
-            "action": "turn",
-            "value": "off"
-        }
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is",
+                "value": "on"
+            }
+        ],
+        "then": [
+            {
+                "subject": "lgt1",
+                "action": "turn",
+                "value": "off"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "btn1",
-        "if": {
-            "object": "lgt1",
-            "attribute": "intensity",
-            "condition": "is",
-            "value": "on"
-        },
-        "then": {
-            "object": "btn1",
-            "action": "change text to",
-            "value": "Turn on"
-        }
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is",
+                "value": "on"
+            }
+        ],
+        "then": [
+            {
+                "subject": "btn1",
+                "action": "change text to",
+                "value": "Turn on"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "btn1",
-        "if": {
-            "object": "lgt1",
-            "attribute": "intensity",
-            "condition": "is",
-            "value": "off"
-        },
-        "then": {
-            "object": "btn1",
-            "action": "change text to",
-            "value": "Turn off"
-        }
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is",
+                "value": "off"
+            }
+        ],
+        "then": [
+            {
+                "subject": "btn1",
+                "action": "change text to",
+                "value": "Turn off"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "attribute": "closed",
+                "condition": "is",
+                "value": "true"
+            }
+        ],
+        "then": [
+            {
+                "subject": "doorStatus",
+                "action": "is visible",
+                "value": "true"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "object": "user",
+                "attribute": "has-key",
+                "condition": "is",
+                "value": "true"
+            }
+        ],
+        "then": [
+            {
+                "subject": "doorStatus",
+                "action": "change text to",
+                "value": "The door is open"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "object": "user",
+                "attribute": "has-key",
+                "condition": "is",
+                "value": "true"
+            }
+        ],
+        "then": [
+            {
+                "subject": "door",
+                "attribute": "closed",
+                "value": "false"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "key",
+        "then": [
+            {
+                "subject": "user",
+                "action": "has key",
+                "value": "true"
+            },
+            {
+                "subject": "key",
+                "action": "is visible",
+                "value": "false"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "attribute": "closed",
+                "condition": "==",
+                "value": "false"
+            }
+        ],
+        "then": [
+            {
+                "subject": "door",
+                "attribute": "position.x",
+                "value": "-0.907"
+            },
+            {
+                "subject": "door",
+                "action": "change z position to",
+                "value": "1.293"
+            },
+            {
+                "subject": "door",
+                "attribute": "rotation.y",
+                "value": "360"
+            }
+        ]
     },
     {
         "default": true,
         "action": "change color to",
-        "if": {},
-        "then": {
-            "attribute": "color"
-        }
+        "then": [
+            {
+                "attribute": "color"
+            }
+        ]
     },
     {
         "default": true,
         "action": "turn",
-        "if": {},
-        "then": {
-            "attribute": "intensity"
-        }
+        "then": [
+            {
+                "attribute": "intensity"
+            }
+        ]
     },
     {
         "default": true,
         "action": "change text to",
-        "if": {},
-        "then": {
-            "attribute": "value"
-        }
+        "then": [
+            {
+                "attribute": "value"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "is visible",
+        "then": [
+            {
+                "attribute": "visible"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "has key",
+        "then": [
+            {
+                "attribute": "has-key"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "change z position to",
+        "then": [
+            {
+                "attribute": "position.z"
+            }
+        ]
     }
 ]
