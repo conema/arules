@@ -6,9 +6,9 @@
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
-    <script src="/Script/cursor.js"></script>
-    <script src="/Script/readJSON.js"></script>
-    <title>MyScene</title>
+    <script type="module" src="/Script/utils.js"></script>
+    <script type="module" src="/Script/readJSON.js"></script>
+    <title>A-Rules</title>
 </head>
 
 <body>
@@ -68,6 +68,11 @@
 
         <a-text id="doorStatus" position="2.262 1.726 3.134" rotation="0 0 0" value="The door is closed"
             color="white" align="center" visible="false" width="3"></a-text>
+
+
+        <a-image id="photo"src="/View/lago.jpg" position="0 1.269 -10.510" scale="4 4 0" visible="false"></a-image>
+        <a-text id="btn2" position="-3.304 0.463 -1.943" rotation="-2.355 15.593 2.675" value="Show img" color="black"
+            geometry="primitive:plane" align="center"></a-text>
 
     </a-scene>
 </body>

@@ -23,7 +23,8 @@
         ],
         "then": [
             {
-                "attribute": "visible",
+                "subject": "dode1",
+                "action": "is visible",
                 "value": false
             }
         ]
@@ -41,7 +42,8 @@
         ],
         "then": [
             {
-                "attribute": "visible",
+                "subject": "dode1",
+                "action": "is visible",
                 "value": true
             }
         ]
@@ -53,7 +55,7 @@
         "then": [
             {
                 "subject": "dode1",
-                "attribute": "visible",
+                "action": "is visible",
                 "value": false
             }
         ]
@@ -65,7 +67,7 @@
         "if": [
             {
                 "object": "box1",
-                "attribute": "position.y",
+                "attribute": "{position.y}",
                 "condition": "==",
                 "value": "{dode1.position.y - dode1.position.y + position.y + box1.position.x - box1.position.x + position.x - position.x}"
             }
@@ -73,7 +75,7 @@
         "then": [
             {
                 "subject": "sph1",
-                "attribute": "position.x",
+                "attribute": "{position.x}",
                 "value": "{position.x + 3 - position.y + dode1.position.y}"
             }
         ]
@@ -292,13 +294,8 @@
         "then": [
             {
                 "subject": "user",
-                "action": "has key",
-                "value": "true"
-            },
-            {
-                "subject": "key",
-                "action": "is visible",
-                "value": "false"
+                "action": "collects",
+                "value": "key"
             }
         ]
     },
@@ -315,19 +312,23 @@
         ],
         "then": [
             {
-                "subject": "door",
-                "attribute": "position.x",
-                "value": "-0.907"
-            },
+                "subject": "user",
+                "action": "open",
+                "value": "door"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "btn2",
+        "if": [
+        ],
+        "then": [
             {
-                "subject": "door",
-                "action": "change z position to",
-                "value": "1.293"
-            },
-            {
-                "subject": "door",
-                "attribute": "rotation.y",
-                "value": "360"
+                "subject": "photo",
+                "action": "is visible",
+                "value": "true"
             }
         ]
     },
@@ -382,6 +383,59 @@
         "then": [
             {
                 "attribute": "position.z"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "subject": "user",
+        "action": "collects",
+        "object": "key",
+        "then": [
+            {
+                "subject": "user",
+                "attribute": "has-key",
+                "value": "true"
+            },
+            {
+                "subject": "key",
+                "attribute": "visible",
+                "value": "false"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "key",
+        "then": [
+            {
+                "subject": "user",
+                "action": "collects",
+                "value": "key"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "subject": "user",
+        "action": "open",
+        "object": "door",
+        "then": [
+            {
+                "subject": "door",
+                "attribute": "{position.x}",
+                "value": "-0.907"
+            },
+            {
+                "subject": "door",
+                "attribute": "{position.z}",
+                "value": "1.293"
+            },
+            {
+                "subject": "door",
+                "attribute": "{rotation.y}",
+                "value": "360"
             }
         ]
     }
