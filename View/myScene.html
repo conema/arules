@@ -1,37 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
-    <script src="/Script/cursor.js"></script>
-    <script src="/Script/readJSON.js"></script>
-    <title>MyScene</title>
+    <script type="module" src="/Script/utils.js"></script>
+    <script type="module" src="/Script/readJSON.js"></script>
+    <title>A-Rules</title>
 </head>
+
 <body>
     <a-scene>
-        <a-camera>
-            <a-cursor></a-cursor>
+        <a-camera position="0.030 1.540 6.896">
+            <a-cursor color="gray"></a-cursor>
         </a-camera>
+
+        <a-entity id="user" has-key="false"></a-entity>
 
         <a-assets>
             <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
             <img id="sechelt-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+            <img id="sky" src="/View/sky.jpg">
+            <a-asset-item id="doorAsset" src="/View/objects/door/scene.gltf"></a-asset-item>
+            <a-asset-item id="keyAsset" src="/View/objects/key/scene.gltf"></a-asset-item>
+            <a-asset-item id="wallAsset" src="/View/objects/wall/scene.gltf"></a-asset-item>
+            <a-asset-item id="floorAsset" src="/View/objects/floor/scene.gltf"></a-asset-item>
         </a-assets>
-    
-        <a-entity id="thumb1" class="link"
-            geometry="primitive: plane; height: 1; width: 1"
-            material="shader: flat; src: #cubes-thumb"
-            position="-1.060 2 -5"></a-entity>
+
+        <a-entity id="thumb1" class="link" geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: #cubes-thumb" position="-1.060 2 -5"></a-entity>
 
 
         <a-box id="box1" position="-1.060 0.5 -5" rotation="0 45 0" color="blue"></a-box>
         <a-dodecahedron id="dode1" position="1.0096 1 -5" color="purple" radius="1"></a-dodecahedron>
         <a-sphere id="sph1" position="2 0.5 -3" color="yellow" radius="0.5"></a-sphere>
 
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
+        <!--<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+        <a-sky color="#ededed"></a-sky>-->
+        <a-sky src="#sky"></a-sky>
+
+        <a-light id="lgt1" type="point" color="white" position="0 5 0" intensity="1"></a-light>
+        <a-text id="btn1" position="-1.977 0.453 -2.685" rotation="-2.355 15.593 2.675" value="Turn off" color="black"
+            geometry="primitive:plane" align="center"></a-text>
+
+        <a-entity id="wall" gltf-model="#wallAsset" scale="0.03 0.05 0.04" position="-3.973 -0.825 2.143"
+            rotation="0 0 0"></a-entity>
+        <a-entity id="wall2" gltf-model="#wallAsset" scale="0.070 0.05 0.04" position="-7.260 -0.825 -4.492"
+            rotation="0 -90 0"></a-entity>
+        <a-entity id="wall3" gltf-model="#wallAsset" scale="0.080 0.05 0.04" position="0.264 -0.825 -11.052"
+            rotation="0 0 0"></a-entity>
+        <a-entity id="wall4" gltf-model="#wallAsset" scale="0.07 0.05 0.04" position="8.172 -0.825 -4.599"
+            rotation="0 -90 0"></a-entity>
+        <a-entity id="wall5" gltf-model="#wallAsset" scale="0.038 0.05 0.04" position="4.830 -0.825 2.143"
+            rotation="0 0 0"></a-entity>
+
+        <a-entity id="door" gltf-model="#doorAsset" scale="0.04 0.04 0.04" position="0 1.085 2.143" rotation="0 270 0"
+            closed="true"></a-entity>
+        <a-entity id="key" gltf-model="#keyAsset" scale="0.04 0.04 0.04" position="2.337 1.041 3.270"
+            rotation="0 180 0"></a-entity>
+        <a-light id="lgt2" type="point" color="white" position="0 5 10.342" rotation="8.860 0.080 0" intensity="1">
+        </a-light>
+
+        <a-entity id="floor" gltf-model="#floorAsset" scale="5 1 5" position="0.474 -0.978 1.192" rotation="0 180 0">
+        </a-entity>
+
+        <a-text id="doorStatus" position="2.262 1.726 3.134" rotation="0 0 0" value="The door is closed"
+            color="white" align="center" visible="false" width="3"></a-text>
+
+
+        <a-image id="photo"src="/View/lago.jpg" position="0 1.269 -10.510" scale="4 4 0" visible="false"></a-image>
+        <a-text id="btn2" position="-3.304 0.463 -1.943" rotation="-2.355 15.593 2.675" value="Show img" color="black"
+            geometry="primitive:plane" align="center"></a-text>
+
     </a-scene>
 </body>
 

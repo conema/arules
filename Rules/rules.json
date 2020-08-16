@@ -1,113 +1,442 @@
-
-    [{
-        "subject": "user",
-        "action": "click",
-        "object": "box1",
-        "if": {
-            "attribute": "color",
-            "condition": "==",
-            "value": "blue"
-        },
-        "then": {
-            "attribute": "color",
-            "value": "red"
-        }
-    },
-
-    {
-        "subject": "user",
-        "action": "click",
-        "object": "box1",
-        "if": {
-            "attribute": "color",
-            "condition": "==",
-            "value": "red"
-        },
-        "then": {
-            "attribute": "color",
-            "value": "green"
-        }
-    },
-
-    {
-        "subject": "user",
-        "action": "click",
-        "object": "box1",
-        "if": {
-            "attribute": "color",
-            "condition": "==",
-            "value": "green"
-        },
-        "then": {
-            "attribute": "color",
-            "value": "blue"
-        }
-    },
-
+[
     {
         "subject": "user",
         "action": "click",
         "object": "dode1",
-        "if": {
-        },
-        "then": {
-            "attribute": "position",
-            "value": "2 1 -5"
-        }
+        "then": [
+            {
+                "attribute": "position",
+                "value": "2 1 -5"
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "dode1",
-        "if": {
-            "attribute": "visible",
-            "condition": "==",
-            "value": true
-        },
-        "then": {
-            "attribute": "visible",
-            "value": false
-        }
+        "if": [
+            {
+                "attribute": "visible",
+                "condition": "==",
+                "value": true
+            }
+        ],
+        "then": [
+            {
+                "subject": "dode1",
+                "action": "is visible",
+                "value": false
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "dode1",
-        "if": {
-            "attribute": "visible",
-            "condition": "==",
-            "value": false
-        },
-        "then": {
-            "attribute": "visible",
-            "value": true
-        }
+        "if": [
+            {
+                "attribute": "visible",
+                "condition": "==",
+                "value": false
+            }
+        ],
+        "then": [
+            {
+                "subject": "dode1",
+                "action": "is visible",
+                "value": true
+            }
+        ]
     },
     {
         "subject": "user",
         "action": "click",
         "object": "thumb1",
-        "if": {
-        },
-        "then": {
-            "object": "dode1",
-            "attribute": "visible",
-            "value": false
-        }
+        "then": [
+            {
+                "subject": "dode1",
+                "action": "is visible",
+                "value": false
+            }
+        ]
     },
-        {
-            "subject": "user",
-            "action": "click",
-            "object": "sph1",
-            "if": {
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "sph1",
+        "if": [
+            {
                 "object": "box1",
-                "attribute": "position.y",
+                "attribute": "{position.y}",
                 "condition": "==",
                 "value": "{dode1.position.y - dode1.position.y + position.y + box1.position.x - box1.position.x + position.x - position.x}"
-            },
-            "then": {
-                "object": "sph1",
-                "attribute": "position.x",
+            }
+        ],
+        "then": [
+            {
+                "subject": "sph1",
+                "attribute": "{position.x}",
                 "value": "{position.x + 3 - position.y + dode1.position.y}"
             }
-        }]
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "mouseenter",
+        "object": "sph1",
+        "then": [
+            {
+                "subject": "sph1",
+                "action": "change color to",
+                "value": "green"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "box1",
+        "if": [
+            {
+                "attribute": "color",
+                "condition": "==",
+                "value": "blue"
+            }
+        ],
+        "then": [
+            {
+                "subject": "box1",
+                "action": "change color to",
+                "value": "red"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "box1",
+        "if": [
+            {
+                "attribute": "color",
+                "condition": "==",
+                "value": "red"
+            }
+        ],
+        "then": [
+            {
+                "attribute": "color",
+                "value": "green"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "box1",
+        "if": [
+            {
+                "attribute": "color",
+                "condition": "is",
+                "value": "green"
+            }
+        ],
+        "then": [
+            {
+                "subject": "box1",
+                "action": "change color to",
+                "value": "blue"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "btn1",
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is not",
+                "value": "on"
+            }
+        ],
+        "then": [
+            {
+                "subject": "lgt1",
+                "action": "turn",
+                "value": "on"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "btn1",
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is",
+                "value": "on"
+            }
+        ],
+        "then": [
+            {
+                "subject": "lgt1",
+                "action": "turn",
+                "value": "off"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "btn1",
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is",
+                "value": "on"
+            }
+        ],
+        "then": [
+            {
+                "subject": "btn1",
+                "action": "change text to",
+                "value": "Turn on"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "btn1",
+        "if": [
+            {
+                "object": "lgt1",
+                "attribute": "intensity",
+                "condition": "is",
+                "value": "off"
+            }
+        ],
+        "then": [
+            {
+                "subject": "btn1",
+                "action": "change text to",
+                "value": "Turn off"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "attribute": "closed",
+                "condition": "is",
+                "value": "true"
+            }
+        ],
+        "then": [
+            {
+                "subject": "doorStatus",
+                "action": "is visible",
+                "value": "true"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "object": "user",
+                "attribute": "has-key",
+                "condition": "is",
+                "value": "true"
+            }
+        ],
+        "then": [
+            {
+                "subject": "doorStatus",
+                "action": "change text to",
+                "value": "The door is open"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "object": "user",
+                "attribute": "has-key",
+                "condition": "is",
+                "value": "true"
+            }
+        ],
+        "then": [
+            {
+                "subject": "door",
+                "attribute": "closed",
+                "value": "false"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "key",
+        "then": [
+            {
+                "subject": "user",
+                "action": "collects",
+                "value": "key"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "door",
+        "if": [
+            {
+                "attribute": "closed",
+                "condition": "==",
+                "value": "false"
+            }
+        ],
+        "then": [
+            {
+                "subject": "user",
+                "action": "open",
+                "value": "door"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "btn2",
+        "if": [
+        ],
+        "then": [
+            {
+                "subject": "photo",
+                "action": "is visible",
+                "value": "true"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "change color to",
+        "then": [
+            {
+                "attribute": "color"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "turn",
+        "then": [
+            {
+                "attribute": "intensity"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "change text to",
+        "then": [
+            {
+                "attribute": "value"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "is visible",
+        "then": [
+            {
+                "attribute": "visible"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "has key",
+        "then": [
+            {
+                "attribute": "has-key"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "action": "change z position to",
+        "then": [
+            {
+                "attribute": "position.z"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "subject": "user",
+        "action": "collects",
+        "object": "key",
+        "then": [
+            {
+                "subject": "user",
+                "attribute": "has-key",
+                "value": "true"
+            },
+            {
+                "subject": "key",
+                "attribute": "visible",
+                "value": "false"
+            }
+        ]
+    },
+    {
+        "subject": "user",
+        "action": "click",
+        "object": "key",
+        "then": [
+            {
+                "subject": "user",
+                "action": "collects",
+                "value": "key"
+            }
+        ]
+    },
+    {
+        "default": true,
+        "subject": "user",
+        "action": "open",
+        "object": "door",
+        "then": [
+            {
+                "subject": "door",
+                "attribute": "{position.x}",
+                "value": "-0.907"
+            },
+            {
+                "subject": "door",
+                "attribute": "{position.z}",
+                "value": "1.293"
+            },
+            {
+                "subject": "door",
+                "attribute": "{rotation.y}",
+                "value": "360"
+            }
+        ]
+    }
+]
