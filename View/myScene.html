@@ -14,10 +14,8 @@
 <body>
     <a-scene>
         <a-camera position="0.030 1.540 6.896">
-            <a-cursor color="gray"></a-cursor>
+            <a-cursor color="gray" id="user" has-key="false"></a-cursor>
         </a-camera>
-
-        <a-entity id="user" has-key="false"></a-entity>
 
         <a-assets>
             <img id="cubes-thumb" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
@@ -70,7 +68,7 @@
             color="white" align="center" visible="false" width="3"></a-text>
 
 
-        <a-image id="photo"src="/View/lago.jpg" position="0 1.269 -10.510" scale="4 4 0" visible="false"></a-image>
+        <a-image id="photo"src="/View/lake.jpg" position="0 1.269 -10.510" scale="4 4 0" visible="false"></a-image>
         <a-text id="btn2" position="-3.304 0.463 -1.943" rotation="-2.355 15.593 2.675" value="Show img" color="black"
             geometry="primitive:plane" align="center"></a-text>
 

@@ -405,18 +405,6 @@
         ]
     },
     {
-        "subject": "user",
-        "action": "click",
-        "object": "key",
-        "then": [
-            {
-                "subject": "user",
-                "action": "collects",
-                "value": "key"
-            }
-        ]
-    },
-    {
         "default": true,
         "subject": "user",
         "action": "open",

@@ -24,6 +24,24 @@ loadJSON('/Rules/rules.json').then(function (response) {
 
                 for (var r of rules) {
                     var conditionEvaluated = true
+                    
+                    // Go to the next rule if the subject is wrong
+                    if (event.detail != undefined) {
+                        if (event.detail.cursorEl != undefined){
+                            if (r["subject"] !=  event.detail.cursorEl.id) {
+                                continue
+                            }
+                        }
+
+                        // Add other "ifs" for the other cases (e.g. if two object collide)
+                    } else if (r["default"]){
+                        if (r["subject"] != undefined && r["subject"] != event.target.id){
+                            continue
+                        }
+                    }
+
+
+                    //console.log(event.detail, r["subject"], event)
 
                     if (r["if"] != undefined) {
                         for (var ifr of r["if"]) {
